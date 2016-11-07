@@ -58,7 +58,6 @@ fabric.properties
 
 .gitignore
 .idea/
-settings.gradle
 
 #mesos-labs specific
 vagrant/movies
