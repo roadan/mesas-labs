@@ -58,7 +58,6 @@ fabric.properties
 
 .gitignore
 .idea/
-scheduler/
 settings.gradle
 
 #mesos-labs specific
