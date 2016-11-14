@@ -5,6 +5,7 @@ Vagrant.configure(2) do |config|
   config.vm.network "private_network", ip: "192.168.33.112"
   config.vm.hostname = "demo-node"
   config.vm.synced_folder "../scalable-downloader/scheduler/build/libs/", "/scheduler"
+  config.vm.synced_folder "../scalable-downloader/executor/build/libs/", "/executor"
   config.vm.synced_folder "movies/", "/movies"
            
   config.vm.provider "virtualbox" do |vb|

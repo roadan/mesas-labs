@@ -36,3 +36,9 @@ echo "--------------"
 
 service mesos-master start
 service mesos-slave start
+service marathon start
+
+cd /executor/
+wget https://s3-ap-southeast-2.amazonaws.com/amaterasu/movies.zip
+unzip movies
+
