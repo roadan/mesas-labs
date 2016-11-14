@@ -6,7 +6,7 @@ import org.apache.mesos.{ MesosSchedulerDriver, Protos }
 object Launcher extends App {
 
   val frameworkBuilder = Protos.FrameworkInfo.newBuilder()
-    .setName(s"The dallas buyers framework")
+    .setName(s"The scalable downloader framework")
     .setFailoverTimeout(10)
     .setUser("root")
 
@@ -14,4 +14,5 @@ object Launcher extends App {
 
   val driver = new MesosSchedulerDriver(scheduler, frameworkBuilder.build(), "192.168.33.112:5050")
   driver.run()
+
 }

@@ -4,7 +4,7 @@
 
 In this lab we will install Docker on our Mesos node and will configure Mesos to support Docker in addition to Mesos ontainerizers
 
-### Step 1 - Try (and fail) Running a Docker Image
+### TRask 1 - Try (and fail) Running a Docker Image
 
 - Start the Vagrant machine and ssh into it using the following comands:
 
@@ -43,7 +43,7 @@ http://192.168.33.112:5050/
 ```
 - When your application will fail to create,
 
-### Step 2 - Install Docker and Configure Mesos to use Docker
+### Task 2 - Install Docker and Configure Mesos to use Docker
 
 - Install and start Docker on the Vagrant Machine
 
@@ -61,4 +61,4 @@ sudo service docker start
 sudo service mesos-slave restart
 ```
 
-- repeat Step 1
+- repeat Task 1

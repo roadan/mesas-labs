@@ -1,3 +1,5 @@
+import java.io.{File, FileNotFoundException, FileOutputStream, IOException}
+
 import org.apache.mesos.Protos._
 import org.apache.mesos.{Executor, ExecutorDriver}
 import play.api.libs.ws.ning.NingWSClient
@@ -29,25 +31,15 @@ class DownloaderExecutor extends Executor {
 
   override def launchTask(executorDriver: ExecutorDriver, taskInfo: TaskInfo): Unit = {
 
-    val wsClient = NingWSClient()
-    wsClient
-      .url(uri)
-      .get()
-      .map { wsResponse => {
-          driver.sendFrameworkMessage(s"movie $uri returned ${wsResponse.status}".getBytes())
-        }
-      }
 
   }
-
 }
 
 object DownloaderExecutor {
 
-  def apply(uri: String): DownloaderExecutor = {
+  def apply(): DownloaderExecutor = {
 
     val res = new DownloaderExecutor()
-    res.uri = uri
     res
 
   }

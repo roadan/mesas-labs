@@ -14,3 +14,7 @@ dependencies {
     compile 'org.scala-lang:scala-library:2.12.0'
     compile group: 'org.apache.mesos', name: 'mesos', version: '0.28.1'
 }
+
+configurations.all {
+    resolutionStrategy.force "org.scala-lang:scala-library:2.10.5"
+}

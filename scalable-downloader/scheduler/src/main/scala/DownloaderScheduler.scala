@@ -1,18 +1,20 @@
+import java.io.{InputStream, OutputStream}
+import java.nio.ByteBuffer
 import java.util
+import java.util.UUID
 import java.util.concurrent.ConcurrentLinkedDeque
 
+import com.google.protobuf.{ByteString, CodedInputStream}
+import com.google.protobuf.ByteString.ByteIterator
 import org.apache.mesos.Protos._
 import org.apache.mesos.{Scheduler, SchedulerDriver}
 
 import scala.collection.JavaConversions._
 
-/**
-  * * Created by roadan on 7/23/16.
-  **/
 class DownloaderScheduler extends Scheduler {
 
   private var frameworkId: FrameworkID = null
-  private val fileList = new ConcurrentLinkedDeque[String]()
+  private val downloadQueue = new ConcurrentLinkedDeque[String]()
 
   override def offerRescinded(schedulerDriver: SchedulerDriver, offerID: OfferID): Unit = ???
 
@@ -24,9 +26,15 @@ class DownloaderScheduler extends Scheduler {
 
   override def error(schedulerDriver: SchedulerDriver, s: String): Unit = ???
 
-  override def statusUpdate(schedulerDriver: SchedulerDriver, taskStatus: TaskStatus): Unit = ???
+  override def statusUpdate(schedulerDriver: SchedulerDriver, taskStatus: TaskStatus): Unit = {
 
-  override def frameworkMessage(schedulerDriver: SchedulerDriver, executorID: ExecutorID, slaveID: SlaveID, bytes: Array[Byte]): Unit = ???
+    println(s"status updated: ${taskStatus.getState}")
+
+  }
+
+  override def frameworkMessage(schedulerDriver: SchedulerDriver, executorID: ExecutorID, slaveID: SlaveID, bytes: Array[Byte]): Unit = {
+
+  }
 
   override def resourceOffers(schedulerDriver: SchedulerDriver, list: util.List[Offer]): Unit = {
 
@@ -39,8 +47,8 @@ class DownloaderScheduler extends Scheduler {
 
   override def registered(schedulerDriver: SchedulerDriver, frameworkID: FrameworkID, masterInfo: MasterInfo): Unit = {
 
-    println("registered")
-    this.frameworkId = frameworkId
+    println(s"registered")
+    this.frameworkId = frameworkID
 
   }
 
@@ -59,7 +67,9 @@ class DownloaderScheduler extends Scheduler {
       .setScalar(Value.Scalar.newBuilder().setValue(value)).build()
   }
 
-  override def executorLost(schedulerDriver: SchedulerDriver, executorID: ExecutorID, slaveID: SlaveID, i: Int): Unit = ???
+  override def executorLost(schedulerDriver: SchedulerDriver, executorID: ExecutorID, slaveID: SlaveID, i: Int): Unit = {
+
+  }
 
 }
 
@@ -69,10 +79,10 @@ object DownloaderScheduler {
 
     val result = new DownloaderScheduler()
 
-    result.fileList.add("IMG_6052.m4v")
-    result.fileList.add("IMG_6051.m4v")
-    result.fileList.add("IMG_6041.m4v")
-    result.fileList.add("IMG_2228.m4v")
+    result.downloadQueue.add("IMG_6052.m4v")
+    result.downloadQueue.add("IMG_6051.m4v")
+    result.downloadQueue.add("IMG_6041.m4v")
+    result.downloadQueue.add("IMG_2228.m4v")
 
     result
 
