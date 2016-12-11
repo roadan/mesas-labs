@@ -32,7 +32,7 @@ http://192.168.33.112:5050/
   "container": {
     "docker": {
       "image": "roadan/nodeapp",
-      "network": "HOST",
+      "network": "BRIDGE",
       "forcePullImage": true,
       "portMappings": [
             { "hostPort": 0, "containerPort": 8181 } ]
@@ -48,10 +48,12 @@ http://192.168.33.112:5050/
 - Install and start Docker on the Vagrant Machine
 
 ```
-sudo yum install -y docker
+sudo yum -y install docker
 sudo chkconfig docker on
 sudo service docker start
 ```
+
+**Note:** this is a workaround for a bug. This should be fixed in future versions.
 
 - Configure Mesos to support both Docker and Mesos containerizers, by cerating the `/etc/mesos-slave/containerizers` file and adding the following line to it: `docker,mesos`
 
